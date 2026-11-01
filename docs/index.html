@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>FilePort</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📤%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./">FilePort</a>
+  <div class="seg" id="tabs"><button data-tab="send" class="on">送る</button><button data-tab="history">履歴</button></div>
+  <button id="theme" class="icon" aria-label="テーマを切り替え">◐</button>
+</header>
+<main>
+  <section id="v-send" class="view">
+    <h1>ファイルを送る</h1>
+    <p class="sub">選ぶだけで、共有リンクとQRコードができます。</p>
+    <label id="drop" class="drop">
+      <input id="pick" type="file" multiple hidden>
+      <strong>ファイルを選択</strong>
+      <span>またはここにドロップ</span>
+      <small id="limits"></small>
+    </label>
+    <ul id="list" class="list"></ul>
+    <div id="opts" class="card" hidden>
+      <div class="row"><span>有効期限</span>
+        <div class="seg" id="expiry"><button data-v="1h">1時間</button><button data-v="24h" class="on">24時間</button><button data-v="7d">7日間</button><button data-v="30d">30日間</button></div></div>
+      <div class="row"><span>パスワード</span><input id="pw" type="password" placeholder="なし" autocomplete="new-password" maxlength="64"></div>
+      <div class="row" id="keyrow" hidden><span>合言葉</span><input id="key" type="password" placeholder="必須" autocomplete="off"></div>
+    </div>
+    <div id="prog" class="prog" hidden><div class="track"><i id="bar"></i></div><span id="pct">0%</span></div>
+    <button id="go" class="primary" hidden>アップロード</button>
+  </section>
+
+  <section id="v-done" class="view" hidden>
+    <div class="card center">
+      <div class="check">✓</div>
+      <h2>リンクを発行しました</h2>
+      <p class="sub" id="doneinfo"></p>
+      <img id="qr" class="qr" alt="ダウンロード用QRコード">
+      <div class="urlbox"><input id="url" readonly><button id="copy" class="primary sm">コピー</button></div>
+      <button id="again" class="link">続けて送る</button>
+    </div>
+  </section>
+
+  <section id="v-history" class="view" hidden>
+    <h1>履歴</h1>
+    <p class="sub">このブラウザで発行したリンクです。ダウンロード履歴も確認できます。</p>
+    <div id="hist"></div>
+  </section>
+
+  <section id="v-get" class="view" hidden><div class="card" id="getbox"></div></section>
+</main>
+<div id="toast" class="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
